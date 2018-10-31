@@ -1,0 +1,116 @@
+* {
+	margin: 0;
+	padding: 0;
+	background: #212721;
+}
+
+#swanson {
+	max-width: 100%;
+	height: auto;
+}
+
+#swanson:active {
+	max-width: 100%;
+	height: auto;
+}
+
+#borg, #pizza {
+	display: inline-block;
+	padding: 8px 16px;
+	font-size: 1.2rem;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: black;
+	background-color: #3498db;
+	border: none;
+	border-radius: 2px;
+	box-shadow: 0 4px #999;
+}
+
+#borg:active, #pizza:active {
+  background-color: #1e73ac;
+  box-shadow: 0 5px #666;
+  transform: translateY(2px);
+}
+
+#borg:disabled, #pizza:disabled {
+	border: 1px solid #999;
+  background-color: #ccc;
+  color: #666;
+}
+
+.site {
+	font-family: Arial, sans-serif;
+	font-size: 1.2rem;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+
+.flex-container > div {
+	text-align: center;
+	color: white;
+	padding: 2.5rem;
+}
+
+.rightPanel {
+	width: 45%;
+	padding: 10px;
+}
+
+.column {
+	display: flex;
+}
+
+.sep {
+	display: flex;
+	background-color: white;
+	width: 5%;
+}
+
+.row {
+	display: flex;
+	background-color: white;
+	justify-content: center;
+}
+
+.leftPanel {
+	width: 55%;
+}
+
+.table, td, th {
+	color: black;
+	background-color: white;
+	border: 1px solid #ddd;
+	text-align: center;
+}
+
+.table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+.site-content {
+	flex: 1;
+}
+
+.footer > div {
+	display: flex;
+	flex-direction: row;
+	font-size: 0.8rem;
+	height: 25px;
+	color: white;
+	justify-content: center;
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Swanson Clicker</title>
+	<link rel="shortcut icon" href="sw.ico" type="image/x-icon">
+	<link rel="icon" href="sw.ico" type="image/x-icon">
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<link type="text/css" href="style.css" rel="stylesheet">
+</head>
+
+<body class="site">
+	<main class="site-content">
+		<div class="flex-container">
+			<div class="rightPanel">
+				<h2 id="shells"></h2>
+				<br>
+				<h3>How many times can you click Swanson?</h3>
+				<br>
+				<input id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio();" onmousedown="mouseDown()" onmouseup="mouseUp()">
+			</div>
+			<div class="leftPanel">
+				<table class="table">
+					<thead>
+						<th>
+							Upgrade
+						</th>
+						<th>
+							Cost
+						</th>
+						<th>
+							Owned
+						</th>
+					</thead>
+					<tbody>
+
+						<tr>
+							<td>
+								<div class="row">
+									<div class="column">
+										<img type="image" src="borg.png" alt="Borg Clickers" style="background-color: white; height: 48px; width: 48px;"></img>
+									</div>
+									<div class="sep"></div>
+									<div class="column">
+										<button id="borg" onclick="buyBorg()">Borg Clickers</button>
+									</div>
+								</div>
+							</td>
+							<td id="borgCost">
+							</td>
+							<td id="borgOwned">
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<div class="row">
+									<div class="column">
+										<img type="image" src="pizza.png" alt="Borg Clickers" style="background-color: white; height: 48px; width: 48px;"></img>
+									</div>
+									<div class="sep"></div>
+									<div class="column">
+										<button id="pizza" onclick="buyPizza()">Pizza Shop</button>
+									</div>
+								</div>
+							</td>
+							<td id="pizzaCost">
+							</td>
+							<td id="pizzaOwned">
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</main>
+
+	<footer class="footer">
+		<div>
+			<strong>NOTE: If the page does not load properly, disable Adblock</strong>
+		</div>
+		<div>
+			<strong>Donate: </strong>TRTLuxoqLJsefrGsm9tnGa52Serutov6XgLSf6n84PiM4SCpVCV3q2rQJ2XtHcyUW2YMeUSw1nr6zRa9uBtszqJwPhCcaWhiXW6
+		</div>
+	</footer>
+
+	<script src="game.js"></script>
+
+</body>
+</html>
