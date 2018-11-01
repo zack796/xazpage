@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128518404-1"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Swanson Clicker</title>
@@ -12,8 +14,16 @@
 </head>
 
 <body class="site">
+	<button id="naviBtn" onclick="toggleNav()">Options</button>
+	<div id="mySidenav" class="sidenav">
+		<a href="https://docs.google.com/spreadsheets/d/1Nph6BXna4exy8sRCMVZHGmAQvtCDVfOI4l84y2tE2nM/edit?usp=sharing">Statistics</a>
+		<a href="changelog.html">Changelog</a>
+		<button id="Sound" onclick="toggleSound()"></button>
+		<button id="Reset" onclick="deleteSave()">Reset</button>
+	</div>
+
 	<main class="site-content">
-		<div class="flex-container">
+		<div class="flex-container" style="flex-direction: row;">
 			<div class="rightPanel">
 				<h2 id="shells"></h2>
 				<br>
@@ -88,6 +98,18 @@
 	</footer>
 
 	<script src="game.js"></script>
+	<script>
+	var navOpen = false;
+	function toggleNav() {
+		if(navOpen) {
+			document.getElementById("mySidenav").style.width = "0";
+			navOpen = false;
+		} else {
+			document.getElementById("mySidenav").style.width = "250px";
+			navOpen = true;
+		}
+	}
+	</script>
 
 </body>
 </html>

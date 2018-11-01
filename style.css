@@ -4,6 +4,10 @@
 	background: #212721;
 }
 
+p {
+	color: white;
+}
+
 #swanson {
 	max-width: 100%;
 	height: auto;
@@ -15,7 +19,7 @@
 }
 
 #borg, #pizza {
-	display: inline-block;
+	display: flex;
 	padding: 8px 16px;
 	font-size: 1.2rem;
 	cursor: pointer;
@@ -41,6 +45,72 @@
   color: #666;
 }
 
+#naviBtn {
+	position: absolute;
+	margin: 8px 8px;
+	padding: 12px 8px;
+	width: 5%;
+	font-size: 1.2rem;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: black;
+	background-color: #3498db;
+	border: none;
+	box-shadow: 0 4px #999;
+}
+
+#naviBtn:active, #naviBtn:active {
+  background-color: #1e73ac;
+  box-shadow: 0 5px #666;
+  transform: translateY(2px);
+}
+
+#Reset {
+	margin-left: 10%;
+	padding: 12px 8px;
+	margin: 16px;
+	width: 75%;
+	font-size: 1.2rem;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: black;
+	background-color: #ff2323;
+	border: none;
+	box-shadow: 0 4px #999;
+}
+
+#Reset:active {
+  background-color: #991515;
+  box-shadow: 0 5px #666;
+  transform: translateY(2px);
+}
+
+#Sound {
+	margin-left: 10%;
+	padding: 12px 8px;
+	margin: 16px;
+	width: 75%;
+	font-size: 1.2rem;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	outline: none;
+	color: black;
+	background-color: #5bc0de;
+	border: none;
+	box-shadow: 0 4px #999;
+}
+
+#Sound:active {
+  background-color: #3f869b;
+  box-shadow: 0 5px #666;
+  transform: translateY(2px);
+}
+
 .site {
 	font-family: Arial, sans-serif;
 	font-size: 1.2rem;
@@ -51,7 +121,6 @@
 
 .flex-container {
 	display: flex;
-	flex-direction: row;
 	justify-content: center;
 }
 
@@ -104,6 +173,46 @@ th, td {
 
 .site-content {
 	flex: 1;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: #000;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+		background-color: #000;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }
 
 .footer > div {
