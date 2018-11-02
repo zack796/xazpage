@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
+		<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128518404-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-128518404-1');
+	</script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Swanson Clicker</title>
@@ -25,11 +33,15 @@
 	<main class="site-content">
 		<div class="flex-container" style="flex-direction: row;">
 			<div class="rightPanel">
-				<h2 id="shells"></h2>
-				<br>
-				<h3>How many times can you click Swanson?</h3>
-				<br>
-				<input id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio();" onmousedown="mouseDown()" onmouseup="mouseUp()">
+				<div class="row">
+					<h2 id="shells"></h2>
+				</div>
+				<div class="row">
+					<h5 id="sps"></h5>
+				</div>
+				<div class="row">
+					<input id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio();" onmousedown="mouseDown()" onmouseup="mouseUp()">
+				</div>
 			</div>
 			<div class="leftPanel">
 				<table class="table">
@@ -46,9 +58,9 @@
 					</thead>
 					<tbody>
 
-						<tr>
+						<tr id="borgTable">
 							<td>
-								<div class="row">
+								<div class="row-table">
 									<div class="column">
 										<img type="image" src="borg.png" alt="Borg Clickers" style="background-color: white; height: 48px; width: 48px;"></img>
 									</div>
@@ -64,11 +76,11 @@
 							</td>
 						</tr>
 
-						<tr>
+						<tr id="pizzaTable">
 							<td>
-								<div class="row">
+								<div class="row-table">
 									<div class="column">
-										<img type="image" src="pizza.png" alt="Borg Clickers" style="background-color: white; height: 48px; width: 48px;"></img>
+										<img type="image" src="pizza.png" alt="Pizza Shops" style="background-color: white; height: 48px; width: 48px;"></img>
 									</div>
 									<div class="sep"></div>
 									<div class="column">
@@ -82,8 +94,45 @@
 							</td>
 						</tr>
 
+						<tr id="snailTable">
+							<td>
+								<div class="row-table">
+									<div class="column">
+										<img type="image" src="snail.png" alt="Snail Racers" style="background-color: white; height: 48px; width: 48px;"></img>
+									</div>
+									<div class="sep"></div>
+									<div class="column">
+										<button id="snail" onclick="buySnail()">Snail Racer</button>
+									</div>
+								</div>
+							</td>
+							<td id="snailCost">
+							</td>
+							<td id="snailOwned">
+							</td>
+						</tr>
+
+						<tr id="pineappleTable">
+							<td>
+								<div class="row-table">
+									<div class="column">
+										<img type="image" src="pineapple.png" alt="Pineapple Farm" style="background-color: white; height: 48px; width: 48px;"></img>
+									</div>
+									<div class="sep"></div>
+									<div class="column">
+										<button id="pineapple" onclick="buyPineapple()">Pineapple Farm</button>
+									</div>
+								</div>
+							</td>
+							<td id="pineappleCost">
+							</td>
+							<td id="pineappleOwned">
+							</td>
+						</tr>
+
 					</tbody>
 				</table>
+				<img type="image" src="no-advert.png" alt="Advertisement" style="padding: 8px; max-width: 100%; height: auto;"></img>
 			</div>
 		</div>
 	</main>
