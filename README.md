@@ -1,4 +1,4 @@
-## See the game in action at [pages.turtlecoin.lol/~xaz/](http://swansonclicker.com/)
+## See the game in action at [SwansonClicker.com](http://swansonclicker.com/)
 
 # Swanson Clicker
 
