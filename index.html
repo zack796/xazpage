@@ -1,164 +1,144 @@
 <!DOCTYPE html>
-<html>
 <head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-128518404-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128518404-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-	  gtag('config', 'UA-128518404-1');
-	</script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Swanson Clicker</title>
-	<link rel="shortcut icon" href="sw.ico" type="image/x-icon">
-	<link rel="icon" href="sw.ico" type="image/x-icon">
-	<meta name="keywords" content=""/>
-	<meta name="description" content=""/>
-	<link type="text/css" href="style.css" rel="stylesheet">
+    gtag('config', 'UA-128518404-1');
+  </script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Swanson Clicker</title>
+  <link rel="shortcut icon" href="sw.ico" type="image/x-icon">
+  <link rel="icon" href="sw.ico" type="image/x-icon">
+  <meta name="keywords" content=""/>
+  <meta name="description" content=""/>
+  <link type="text/css" href="style.css" rel="stylesheet">
 </head>
+<html>
+  <body class="site">
+  	<div id="mySidenav" class="sidenav">
+  		<a href="https://docs.google.com/spreadsheets/d/1Nph6BXna4exy8sRCMVZHGmAQvtCDVfOI4l84y2tE2nM/edit?usp=sharing">Statistics</a>
+  		<a href="changelog.html">Changelog</a>
+  		<button id="Sound" onclick="toggleSound()"></button>
+  		<button id="Reset" onclick="deleteSave()">Reset</button>
+  	</div>
+    <main class="site-content">
+      <div class="flex-container">
+        <div class="column-left">
+          <div class="row-title">
+            <div class="row">
+              <h2 id="shells"></h2>
+            </div>
+            <div class="row">
+    					<h5 id="sps"></h5>
+    				</div>
+    				<div class="row">
+    					<input style="auto" id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio();" onmousedown="mouseDown()" onmouseup="mouseUp()">
+    				</div>
+          </div>
+        </div>
 
-<body class="site">
-	<button id="naviBtn" onclick="toggleNav()">Options</button>
-	<div id="mySidenav" class="sidenav">
-		<a href="https://docs.google.com/spreadsheets/d/1Nph6BXna4exy8sRCMVZHGmAQvtCDVfOI4l84y2tE2nM/edit?usp=sharing">Statistics</a>
-		<a href="changelog.html">Changelog</a>
-		<button id="Sound" onclick="toggleSound()"></button>
-		<button id="Reset" onclick="deleteSave()">Reset</button>
-	</div>
+        <div class="column-right">
+          <div class="row">
+            <table class="table">
+              <thead>
+                <th>Upgrade</th>
+                <th>Cost</th>
+                <th>Owned</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="row">
+                      <div class="column">
+                        <img type="image" src="borg.png" alt="Borg Clickers" style="background-color: white; height: 48px; width: 48px;"></img>
+                      </div>
+                      <div class="column">
+                        <button id="borg" onclick="buyBorg()">Borg Clickers</button>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="borgCost"></td>
+                  <td id="borgOwned"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="row">
+                      <div class="column">
+                        <img type="image" src="pizza.png" alt="Pizza Shop" style="background-color: white; height: 48px; width: 48px;"></img>
+                      </div>
+                      <div class="column">
+                        <button id="pizza" onclick="buyPizza()">Pizza Shop</button>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="pizzaCost"></td>
+                  <td id="pizzaOwned"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="row">
+                      <div class="column">
+                        <img type="image" src="snail.png" alt="Snail Racers" style="background-color: white; height: 48px; width: 48px;"></img>
+                      </div>
+                      <div class="column">
+                        <button id="snail" onclick="buySnail()">Snail Racers</button>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="snailCost"></td>
+                  <td id="snailOwned"></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="row">
+                      <div class="column">
+                        <img type="image" src="pineapple.png" alt="Pineapple Farm" style="background-color: white; height: 48px; width: 48px;"></img>
+                      </div>
+                      <div class="column">
+                        <button id="pineapple" onclick="buyPineapple()">Pineapple Farm</button>
+                      </div>
+                    </div>
+                  </td>
+                  <td id="pineappleCost"></td>
+                  <td id="pineappleOwned"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="row">
+            <img id="advert" type="image" src="no-advert.png" alt="Advertisement"></img>
+          </div>
+        </div>
+    </main>
 
-	<main class="site-content">
-		<div class="flex-container" style="flex-direction: row;">
-			<div class="rightPanel">
-				<div class="row">
-					<h2 id="shells"></h2>
-				</div>
-				<div class="row">
-					<h5 id="sps"></h5>
-				</div>
-				<div class="row">
-					<input id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio();" onmousedown="mouseDown()" onmouseup="mouseUp()">
-				</div>
-			</div>
-			<div class="leftPanel">
-				<table class="table">
-					<thead>
-						<th>
-							Upgrade
-						</th>
-						<th>
-							Cost
-						</th>
-						<th>
-							Owned
-						</th>
-					</thead>
-					<tbody>
+    <footer class="footer-row">
+      <div class="row">
+        <p><strong>Donate: </strong>TRTLuxoqLJsefrGsm9tnGa52Serutov6XgLSf6n84PiM4SCpVCV3q2rQJ2XtHcyUW2YMeUSw1nr6zRa9uBtszqJwPhCcaWhiXW6</p>
+      </div>
+    </footer>
 
-						<tr id="borgTable">
-							<td>
-								<div class="row-table">
-									<div class="column">
-										<img type="image" src="borg.png" alt="Borg Clickers" style="background-color: white; height: 48px; width: 48px;"></img>
-									</div>
-									<div class="sep"></div>
-									<div class="column">
-										<button id="borg" onclick="buyBorg()">Borg Clickers</button>
-									</div>
-								</div>
-							</td>
-							<td id="borgCost">
-							</td>
-							<td id="borgOwned">
-							</td>
-						</tr>
+    <div class="column-options">
+      <i id="options" class="fas fa-cog fa-2x" onclick="toggleNav()"></i>
+    </div>
 
-						<tr id="pizzaTable">
-							<td>
-								<div class="row-table">
-									<div class="column">
-										<img type="image" src="pizza.png" alt="Pizza Shops" style="background-color: white; height: 48px; width: 48px;"></img>
-									</div>
-									<div class="sep"></div>
-									<div class="column">
-										<button id="pizza" onclick="buyPizza()">Pizza Shop</button>
-									</div>
-								</div>
-							</td>
-							<td id="pizzaCost">
-							</td>
-							<td id="pizzaOwned">
-							</td>
-						</tr>
-
-						<tr id="snailTable">
-							<td>
-								<div class="row-table">
-									<div class="column">
-										<img type="image" src="snail.png" alt="Snail Racers" style="background-color: white; height: 48px; width: 48px;"></img>
-									</div>
-									<div class="sep"></div>
-									<div class="column">
-										<button id="snail" onclick="buySnail()">Snail Racer</button>
-									</div>
-								</div>
-							</td>
-							<td id="snailCost">
-							</td>
-							<td id="snailOwned">
-							</td>
-						</tr>
-
-						<tr id="pineappleTable">
-							<td>
-								<div class="row-table">
-									<div class="column">
-										<img type="image" src="pineapple.png" alt="Pineapple Farm" style="background-color: white; height: 48px; width: 48px;"></img>
-									</div>
-									<div class="sep"></div>
-									<div class="column">
-										<button id="pineapple" onclick="buyPineapple()">Pineapple Farm</button>
-									</div>
-								</div>
-							</td>
-							<td id="pineappleCost">
-							</td>
-							<td id="pineappleOwned">
-							</td>
-						</tr>
-
-					</tbody>
-				</table>
-				<img type="image" src="no-advert.png" alt="Advertisement" style="padding: 8px; max-width: 100%; height: auto;"></img>
-			</div>
-		</div>
-	</main>
-
-	<footer class="footer">
-		<div>
-			<strong>NOTE: If the page does not load properly, disable Adblock</strong>
-		</div>
-		<div>
-			<strong>Donate: </strong>TRTLuxoqLJsefrGsm9tnGa52Serutov6XgLSf6n84PiM4SCpVCV3q2rQJ2XtHcyUW2YMeUSw1nr6zRa9uBtszqJwPhCcaWhiXW6
-		</div>
-	</footer>
-
-	<script src="game.js"></script>
-	<script>
-	var navOpen = false;
-	function toggleNav() {
-		if(navOpen) {
-			document.getElementById("mySidenav").style.width = "0";
-			navOpen = false;
-		} else {
-			document.getElementById("mySidenav").style.width = "250px";
-			navOpen = true;
-		}
-	}
-	</script>
-
-</body>
+    <script src="game.js"></script>
+  	<script>
+  	var navOpen = false;
+  	function toggleNav() {
+  		if(navOpen) {
+  			document.getElementById("mySidenav").style.width = "0";
+  			navOpen = false;
+  		} else {
+  			document.getElementById("mySidenav").style.width = "250px";
+  			navOpen = true;
+  		}
+  	}
+  	</script>
+  </body>
 </html>
