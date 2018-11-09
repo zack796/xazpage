@@ -25,7 +25,8 @@
   		<a href="https://docs.google.com/spreadsheets/d/1Nph6BXna4exy8sRCMVZHGmAQvtCDVfOI4l84y2tE2nM/edit?usp=sharing">Statistics</a>
   		<a href="changelog.html">Changelog</a>
   		<button id="Sound" onclick="toggleSound(); playAudio('click.mp3');"></button>
-  		<button id="Reset" onclick="deleteSave(); playAudio('click.mp3');">Reset</button>
+  		<button id="ResetHard" onclick="deleteSave('hard'); playAudio('click.mp3');">Hard Reset</button>
+			<button id="ResetSoft" onclick="deleteSave('soft'); playAudio('click.mp3');">Soft Reset</button>
   	</div>
     <main class="site-content">
       <div class="flex-container">
@@ -38,7 +39,7 @@
     					<h5 id="sps"></h5>
     				</div>
     				<div class="row">
-    					<input id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio('quack.mp3');" onmousedown="mouseDown()" onmouseup="mouseUp()">
+    					<input id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio('quack.mp3'); updateTotalClicks();" onmousedown="mouseDown()" onmouseup="mouseUp()">
     				</div>
           </div>
         </div>
@@ -128,9 +129,40 @@
           </div>
 					<div class="row">
 						<div class="btn-container">
-							<button type="button" id="multipleO" onclick="select('multipleO');">1x</button>
-							<button type="button" id="multipleT" onclick="select('multipleT');">10x</button>
-							<button type="button" id="multipleH" onclick="select('multipleH');">100x</button>
+							<div class="flex-container">
+								<button type="button" id="multipleO" onclick="select('multipleO');">1x</button>
+								<button type="button" id="multipleT" onclick="select('multipleT');">10x</button>
+								<button type="button" id="multipleH" onclick="select('multipleH');">100x</button>
+							</div>
+							<div class="panelChanger">
+								<button type="button" id="stats" onclick="">Stats</button>
+								<button type="button" id="achievements" onclick="">Achievements</button>
+								<button type="button" id="items" onclick="">Items</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="statsPanel">
+							<div class="row">
+								<h2 class="stat-title">Lifetime Stats</h2>
+							</div>
+							<hr/>
+							<div class="row">
+								<div class="column-stats">
+									<p id="totalUpgrades"></p>
+									<p id="totalClicks"></p>
+									<p id="shellsEarned"></p>
+								</div>
+								<div class="column-stats">
+									<p id="borgTotal"></p>
+									<p id="pizzaTotal"></p>
+									<p id="snailTotal"></p>
+								</div>
+								<div class="column-stats">
+									<p id="pineappleTotal"></p>
+									<p id="softResets"></p>
+								</div>
+							</div>
 						</div>
 					</div>
         </div>
@@ -147,6 +179,13 @@
     </div>
 
     <script src="game.js"></script>
+		<script>
+		function noenter(){
+			if(!window.event.keyCode === 13) {
+
+			}
+		}
+  	</script>
   	<script>
   	var navOpen = false;
   	function toggleNav() {

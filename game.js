@@ -5,7 +5,17 @@ var game = {
   totalBuildings: 0,
   buildingCoef: 0,
   sound: true,
-  buyAmount: 1
+  buyAmount: 1,
+  globalStats: {
+    clicks: 0,
+    shellsEarned: 0,
+    upgradesBought: 0,
+    borgTotal: 0,
+    pizzaTotal: 0,
+    snailTotal: 0,
+    pineappleTotal: 0,
+    softResets: 0
+  }
 };
 
 var borg = {
@@ -64,45 +74,60 @@ function select(id) {
       document.getElementById('multipleT').style.backgroundColor = '#999999';
       document.getElementById('multipleH').style.backgroundColor = '#999999';
       game.buyAmount = 1;
-      updateCost();
       break;
     case 'multipleT':
       document.getElementById(id).style.backgroundColor = '#33a0ff';
       document.getElementById('multipleO').style.backgroundColor = '#999999';
       document.getElementById('multipleH').style.backgroundColor = '#999999';
       game.buyAmount = 10;
-      updateCost();
       break;
     case 'multipleH':
       document.getElementById(id).style.backgroundColor = '#33a0ff';
       document.getElementById('multipleO').style.backgroundColor = '#999999';
       document.getElementById('multipleT').style.backgroundColor = '#999999';
       game.buyAmount = 100;
-      updateCost();
       break;
   }
 }
 
 // can be optimized, checks for upgrade availability, updates cost, and Shells Per Second
 function updateSwanson(clickAmount) {
+
   buttonsAvailable(borg.cost, borg.id);
   buttonsAvailable(pizza.cost, pizza.id);
   buttonsAvailable(snail.cost, snail.id);
   buttonsAvailable(pineapple.cost, pineapple.id);
+
   updateCost(borg);
   updateCost(pizza);
   updateCost(snail);
   updateCost(pineapple);
+
   shellsPerSecond();
+
+  game.globalStats.shellsEarned += (clickAmount * game.buildingCoef);
+  document.getElementById(`shellsEarned`).innerHTML = "Total Shells Earned: " + numberWithCommas(game.globalStats.shellsEarned);
 
   game.shells += (clickAmount * game.buildingCoef);
   document.getElementById('shells').innerHTML = `Swanson has collected ${numberWithCommas(game.shells)} shells!`;
 }
+
 // given the cost formula, update the cost of a given upgrade
 function updateCost(upgrade) {
   var costFormula = ((upgrade.initCost * (Math.pow(upgrade.coef, game.buyAmount + upgrade.amount) - Math.pow(upgrade.coef, upgrade.amount))) / (upgrade.coef - 1));
   upgrade.cost = costFormula
   document.getElementById(`${upgrade.id}Cost`).innerHTML = numberWithCommas(costFormula);
+}
+
+function initializeGlobal() {
+  game.globalStats.clicks = 0;
+  game.globalStats.shellsEarned = 0;
+  game.globalStats.upgradesBought = 0;
+  game.globalStats.borgTotal = 0;
+  game.globalStats.pizzaTotal = 0;
+  game.globalStats.snailTotal = 0;
+  game.globalStats.pineappleTotal = 0;
+  game.globalStats.softResets = 0;
 }
 
 // initialize game variables and upgrades. Load initial HTML
@@ -134,6 +159,16 @@ function initializeGame() {
   log("Game running");
 
   // shellsPerSecond();
+
+  document.getElementById(`totalUpgrades`).innerHTML = "Total upgrades bought: " + game.globalStats.upgradesBought;
+  document.getElementById(`totalClicks`).innerHTML = "Total clicks: " + game.globalStats.clicks;
+  document.getElementById(`shellsEarned`).innerHTML = "Total Shells Earned: " + game.globalStats.shellsEarned;
+
+  document.getElementById(`borgTotal`).innerHTML = "Borg Clickers bought: " + game.globalStats.borgTotal;
+  document.getElementById(`pizzaTotal`).innerHTML = "Pizza Shops bought: " + game.globalStats.pizzaTotal;
+  document.getElementById(`snailTotal`).innerHTML = "Snail Racers bought: " + game.globalStats.snailTotal;
+  document.getElementById(`pineappleTotal`).innerHTML = "Pineapple Farms bought: " + game.globalStats.pineappleTotal;
+  document.getElementById(`softResets`).innerHTML = "Soft Resets: " + game.globalStats.softResets;
 
   document.getElementById('multipleO').style.backgroundColor = '#33a0ff';
   document.getElementById('multipleT').style.backgroundColor = '#999999';
@@ -237,20 +272,52 @@ const numberWithCommas = (x) => {
 }
 
 function buyUpgrade(upgrade, amount){
-  var costFormula = ((upgrade.initCost * (Math.pow(upgrade.coef, amount + upgrade.amount) - Math.pow(upgrade.coef, upgrade.amount))) / (upgrade.coef - 1));
   // Calculate buying multiple buildings. This equation can be found here: https://blog.kongregate.com/the-math-of-idle-games-part-i/
+  var costFormula = ((upgrade.initCost * (Math.pow(upgrade.coef, amount + upgrade.amount) - Math.pow(upgrade.coef, upgrade.amount))) / (upgrade.coef - 1));
   upgrade.cost = costFormula;
   // if shells is greater or equal to total cost of upgrades
   if(game.shells >= upgrade.cost) {
     upgrade.amount += amount // buy amount
     game.totalBuildings += amount; // increase total buildings by amount
     game.shells -= upgrade.cost; // subtract the shells by total cost
+
+    globalIncrement(upgrade.id);
+
     document.getElementById(`${upgrade.id}Owned`).innerHTML = upgrade.amount.toFixed(0);
     document.getElementById('shells').innerHTML = `Swanson has collected ${numberWithCommas(game.shells)} shells!`;
     log(`${upgrade.id} purchased! ${upgrade.id} count: ` + upgrade.amount, 1)
   };
   upgrade.cost = costFormula;
   document.getElementById(`${upgrade.id}Cost`).innerHTML = numberWithCommas(upgrade.cost);
+}
+
+function globalIncrement(id) {
+  switch (id) {
+    case 'borg':
+      game.globalStats.borgTotal += game.buyAmount;
+      game.globalStats.upgradesBought += game.buyAmount;
+      document.getElementById(`totalUpgrades`).innerHTML = "Total upgrades bought: " + game.globalStats.upgradesBought;
+      document.getElementById(`borgTotal`).innerHTML = "Borg Clickers bought: " + game.globalStats.borgTotal;
+      break;
+    case 'pizza':
+      game.globalStats.pizzaTotal += game.buyAmount;
+      game.globalStats.upgradesBought += game.buyAmount;
+      document.getElementById(`totalUpgrades`).innerHTML = "Total upgrades bought: " + game.globalStats.upgradesBought;
+      document.getElementById(`pizzaTotal`).innerHTML = "Pizza Shops bought: " + game.globalStats.pizzaTotal;
+      break;
+    case 'snail':
+      game.globalStats.snailTotal += game.buyAmount;
+      game.globalStats.upgradesBought += game.buyAmount;
+      document.getElementById(`totalUpgrades`).innerHTML = "Total upgrades bought: " + game.globalStats.upgradesBought;
+      document.getElementById(`snailTotal`).innerHTML = "Snail Racers bought: " + game.globalStats.snailTotal;
+      break;
+    case 'pineapple':
+      game.globalStats.pineappleTotal += game.buyAmount;
+      game.globalStats.upgradesBought += game.buyAmount;
+      document.getElementById(`totalUpgrades`).innerHTML = "Total upgrades bought: " + game.globalStats.upgradesBought;
+      document.getElementById(`pineappleTotal`).innerHTML = "Pineapple Farms bought: " + game.globalStats.pineappleTotal;
+      break;
+  }
 }
 
 // using a formula, calculates the total Shells Per Second and individual upgrades
@@ -269,6 +336,11 @@ function shellsPerSecond() {
 
   var totalSPS =  (borgSPS + pizzaSPS + snailSPS + pineappleSPS);
   document.getElementById('sps').innerHTML = `Per second: ${numberWithCommas(totalSPS)}`;
+}
+
+function updateTotalClicks() {
+  game.globalStats.clicks++;
+  document.getElementById(`totalClicks`).innerHTML = "Total clicks: " + game.globalStats.clicks.toFixed(0);
 }
 
 // updates what buttons are available based on how many shells swanson has
@@ -347,6 +419,16 @@ function load() {
   if(typeof save.pineapple !== "undefined") pineapple = save.pineapple;
   log("Initialized pineapple variable: " + pineapple, 1);
 
+  document.getElementById(`totalUpgrades`).innerHTML = "Total upgrades bought: " + game.globalStats.upgradesBought;
+  document.getElementById(`totalClicks`).innerHTML = "Total clicks: " + game.globalStats.clicks;
+  document.getElementById(`shellsEarned`).innerHTML = "Total Shells Earned: " + game.globalStats.shellsEarned;
+
+  document.getElementById(`borgTotal`).innerHTML = "Borg Clickers bought: " + game.globalStats.borgTotal;
+  document.getElementById(`pizzaTotal`).innerHTML = "Pizza Shops bought: " + game.globalStats.pizzaTotal;
+  document.getElementById(`snailTotal`).innerHTML = "Snail Racers bought: " + game.globalStats.snailTotal;
+  document.getElementById(`pineappleTotal`).innerHTML = "Pineapple Farms bought: " + game.globalStats.pineappleTotal;
+  document.getElementById(`softResets`).innerHTML = "Soft Resets: " + game.globalStats.softResets;
+
   document.getElementById('Sound').innerHTML = "Sound: " + (game.sound ? "On" : "Off");
   document.getElementById('shells').innerHTML = `Swanson has collected ${numberWithCommas(game.shells)} shells!`;
 
@@ -368,15 +450,40 @@ function load() {
 }
 
 // Do you wanna delete your localStorage?
-function deleteSave() {
-  reset = document.getElementById('Reset');
-  if(reset.innerHTML === "Are you sure?") {
+function deleteSave(reset) {
+  hard = document.getElementById('ResetHard');
+  soft = document.getElementById('ResetSoft');
+  if(hard.innerHTML === "Are you sure?" && reset === 'hard') {
     localStorage.removeItem("save");
+    initializeGlobal();
     initializeGame();
-    reset.innerHTML = "Reset";
-    log("Save Game successfully deleted!", 1);
-  } else {
-    reset.innerHTML = "Are you sure?";
+    hard.innerHTML = "Hard Reset";
+    log("Save Game successfully hard reset!", 1);
+  } else if(hard.innerHTML === "Hard Reset" && reset === 'hard') {
+    hard.innerHTML = "Are you sure?";
+    log("Second Chance to rethink what you're doing!", 1);
+  }
+  if(soft.innerHTML === "Are you sure?" && reset === 'soft') {
+
+    localStorage.removeItem("save.game.shells");
+    localStorage.removeItem("save.game.totalBuildings");
+    localStorage.removeItem("save.game.buildingCoef");
+    localStorage.removeItem("save.game.sound");
+    localStorage.removeItem("save.game.buyAmount");
+    localStorage.removeItem("save.borg");
+    localStorage.removeItem("save.pizza");
+    localStorage.removeItem("save.snail");
+    localStorage.removeItem("save.pineapple");
+
+    game.globalStats.softResets++;
+    document.getElementById(`softResets`).innerHTML = "Soft Resets: " + game.globalStats.softResets;
+
+    initializeGame();
+
+    soft.innerHTML = "Soft Reset";
+    log("Save Game successfully soft reset!", 1);
+  } else if (soft.innerHTML === "Soft Reset" && reset === 'soft') {
+    soft.innerHTML = "Are you sure?";
     log("Second Chance to rethink what you're doing!", 1);
   }
 }
@@ -391,12 +498,16 @@ window.onload = () => {
 // updating the game every 100ms
 setInterval(function() {
   updateSwanson(((borg.grow * borg.amount) * (borg.growCoef)));
-  updateSwanson(((pizza.grow * pizza.amount) * (pizza.growCoef))/10);
-  updateSwanson(((snail.grow * snail.amount) * (snail.growCoef))/10);
-  updateSwanson(((pineapple.grow * pineapple.amount) * (pineapple.growCoef))/10);
 }, 100)
+
+// update every second with higher upgrades
+setInterval(function() {
+  updateSwanson(((pizza.grow * pizza.amount) * (pizza.growCoef)));
+  updateSwanson(((snail.grow * snail.amount) * (snail.growCoef)));
+  updateSwanson(((pineapple.grow * pineapple.amount) * (pineapple.growCoef)));
+}, 1000)
 
 // Saves every 5 seconds
 setInterval(function() {
   save();
-}, 5000)
+}, 10000)

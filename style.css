@@ -5,6 +5,15 @@ html, body {
   background: #212721;
 }
 
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #999;
+    margin: 8px 0;
+    padding: 0;
+}
+
 p, h2, h3, h5 {
   color: white;
 }
@@ -114,7 +123,7 @@ th, td {
 		opacity: 1;
 }
 
-#Reset {
+#ResetHard, #ResetSoft {
 	margin-left: 10%;
 	padding: 12px 8px;
 	margin: 16px;
@@ -130,7 +139,7 @@ th, td {
 	box-shadow: 0 4px #999;
 }
 
-#Reset:active {
+#Reset:active, #ResetSoft:active {
   background-color: #991515;
   box-shadow: 0 5px #666;
   transform: translateY(2px);
@@ -244,11 +253,61 @@ th, td {
 
 .btn-container {
 	display: flex;
-	width: 75%;
 	cursor: pointer;
+	width: 75%;
+	justify-content: space-between;
 	outline: none;
 	color: white;
 	border: none;
+}
+
+.panelChanger {
+	display: flex;
+}
+
+#stats, #achievements, #items {
+	font-size: 1rem;
+	background-color:#1e1e1e;
+	-moz-border-radius:1px;
+	-webkit-border-radius:1px;
+	border: 1px solid black;
+	border-bottom: 0px;
+	cursor:pointer;
+	color: white;
+	padding:8px 12px;
+	text-decoration:none;
+}
+
+#stats:hover, #achievements:hover, #items:hover {
+	background-color:#343434;
+}
+
+#stats:disabled, #achievements:disabled, #items:disabled {
+	background-color:#999;
+}
+
+.statsPanel {
+	display: flex;
+	width: 75%;
+	outline: none;
+	color: white;
+	flex-direction: column;
+	background-color: #1e1e1e;
+	border: 1px solid black;
+}
+
+.column-stats {
+	font-size: 0.8rem;
+	width: 33%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 16px;
+}
+
+.stat-title {
+	display: flex;
+	width: 100%;
+	margin: 16px 16px 8px;
 }
 
 #multipleO, #multipleT, #multipleH {
@@ -256,8 +315,7 @@ th, td {
 	background-color:#33a0ff;
 	-moz-border-radius:1px;
 	-webkit-border-radius:1px;
-	margin-top: 2px;
-	border: 1px solid black;
+	border: none;
 	cursor:pointer;
 	color: black;
 	padding:8px 12px;
