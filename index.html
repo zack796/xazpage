@@ -24,8 +24,9 @@
   	<div id="mySidenav" class="sidenav">
   		<a href="https://docs.google.com/spreadsheets/d/1Nph6BXna4exy8sRCMVZHGmAQvtCDVfOI4l84y2tE2nM/edit?usp=sharing">Statistics</a>
   		<a href="changelog.html">Changelog</a>
-  		<button id="Sound" onclick="toggleSound()"></button>
-  		<button id="Reset" onclick="deleteSave()">Reset</button>
+  		<button id="Sound" onclick="toggleSound(); playAudio('click.mp3');"></button>
+  		<button id="ResetHard" onclick="deleteSave('hard'); playAudio('click.mp3');">Hard Reset</button>
+			<button id="ResetSoft" onclick="deleteSave('soft'); playAudio('click.mp3');">Soft Reset</button>
   	</div>
     <main class="site-content">
       <div class="flex-container">
@@ -38,12 +39,15 @@
     					<h5 id="sps"></h5>
     				</div>
     				<div class="row">
-    					<input style="auto" id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio();" onmousedown="mouseDown()" onmouseup="mouseUp()">
+    					<input id="swanson" type="image" src="https://imgur.com/MGYixhN.png" alt="Click Me!" onclick="updateSwanson(1); playAudio('quack.mp3'); updateTotalClicks();" onmousedown="mouseDown()" onmouseup="mouseUp()">
     				</div>
           </div>
         </div>
 
         <div class="column-right">
+					<div class="row">
+						<img id="advert" type="image" src="no-advert.png" alt="Advertisement"></img>
+					</div>
           <div class="row">
             <table class="table">
               <thead>
@@ -56,10 +60,13 @@
                   <td>
                     <div class="row">
                       <div class="column">
-                        <img type="image" src="borg.png" alt="Borg Clickers" style="background-color: white; height: 48px; width: 48px;"></img>
+                        <img type="image" style="background-color: white; background-image: url('upgradeicons.png'); background-position: 0px 0px; height: 48px; width: 48px;"></img>
                       </div>
                       <div class="column">
-                        <button id="borg" onclick="buyBorg()">Borg Clickers</button>
+												<div class="tooltip">
+													<span id="borgInfo" class="tooltiptext"></span>
+                        	<button id="borg" onclick="buyUpgrade(borg, game.buyAmount); playAudio('click.mp3');">Borg Clickers</button>
+												</div>
                       </div>
                     </div>
                   </td>
@@ -70,10 +77,13 @@
                   <td>
                     <div class="row">
                       <div class="column">
-                        <img type="image" src="pizza.png" alt="Pizza Shop" style="background-color: white; height: 48px; width: 48px;"></img>
+                        <img type="image" style="background-color: white; background-image: url('upgradeicons.png'); background-position: 96px 0px; height: 48px; width: 48px;"></img>
                       </div>
                       <div class="column">
-                        <button id="pizza" onclick="buyPizza()">Pizza Shop</button>
+												<div class="tooltip">
+													<span id="pizzaInfo" class="tooltiptext"></span>
+                        	<button id="pizza" onclick="buyUpgrade(pizza, game.buyAmount); playAudio('click.mp3');">Pizza Shop</button>
+												</div>
                       </div>
                     </div>
                   </td>
@@ -84,10 +94,13 @@
                   <td>
                     <div class="row">
                       <div class="column">
-                        <img type="image" src="snail.png" alt="Snail Racers" style="background-color: white; height: 48px; width: 48px;"></img>
+                        <img type="image" style="background-color: white; background-image: url('upgradeicons.png'); background-position: 48px 0px; height: 48px; width: 48px;"></img>
                       </div>
                       <div class="column">
-                        <button id="snail" onclick="buySnail()">Snail Racers</button>
+												<div class="tooltip">
+													<span id="snailInfo" class="tooltiptext"></span>
+                        	<button id="snail" onclick="buyUpgrade(snail, game.buyAmount); playAudio('click.mp3');">Snail Racers</button>
+												</div>
                       </div>
                     </div>
                   </td>
@@ -98,10 +111,13 @@
                   <td>
                     <div class="row">
                       <div class="column">
-                        <img type="image" src="pineapple.png" alt="Pineapple Farm" style="background-color: white; height: 48px; width: 48px;"></img>
+                        <img type="image" style="background-color: white; background-image: url('upgradeicons.png'); background-position: 144px 0px; height: 48px; width: 48px;"></img>
                       </div>
                       <div class="column">
-                        <button id="pineapple" onclick="buyPineapple()">Pineapple Farm</button>
+												<div class="tooltip">
+													<span id="pineappleInfo" class="tooltiptext"></span>
+                        	<button id="pineapple" onclick="buyUpgrade(pineapple, game.buyAmount); playAudio('click.mp3');">Pineapple Farm</button>
+												</div>
                       </div>
                     </div>
                   </td>
@@ -111,9 +127,44 @@
               </tbody>
             </table>
           </div>
-          <div class="row">
-            <img id="advert" type="image" src="no-advert.png" alt="Advertisement"></img>
-          </div>
+					<div class="row">
+						<div class="btn-container">
+							<div class="flex-container">
+								<button type="button" id="multipleO" onclick="select('multipleO');">1x</button>
+								<button type="button" id="multipleT" onclick="select('multipleT');">10x</button>
+								<button type="button" id="multipleH" onclick="select('multipleH');">100x</button>
+							</div>
+							<div class="panelChanger">
+								<button type="button" id="stats" onclick="">Stats</button>
+								<button type="button" id="achievements" onclick="">Achievements</button>
+								<button type="button" id="items" onclick="">Items</button>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="statsPanel">
+							<div class="row">
+								<h2 class="stat-title">Lifetime Stats</h2>
+							</div>
+							<hr/>
+							<div class="row">
+								<div class="column-stats">
+									<p id="totalUpgrades"></p>
+									<p id="totalClicks"></p>
+									<p id="shellsEarned"></p>
+								</div>
+								<div class="column-stats">
+									<p id="borgTotal"></p>
+									<p id="pizzaTotal"></p>
+									<p id="snailTotal"></p>
+								</div>
+								<div class="column-stats">
+									<p id="pineappleTotal"></p>
+									<p id="softResets"></p>
+								</div>
+							</div>
+						</div>
+					</div>
         </div>
     </main>
 
@@ -124,10 +175,17 @@
     </footer>
 
     <div class="column-options">
-      <i id="options" class="fas fa-cog fa-2x" onclick="toggleNav()"></i>
+      <i id="options" class="fas fa-cog fa-2x" onclick="toggleNav(); playAudio('click.mp3');"></i>
     </div>
 
     <script src="game.js"></script>
+		<script>
+		function noenter(){
+			if(!window.event.keyCode === 13) {
+
+			}
+		}
+  	</script>
   	<script>
   	var navOpen = false;
   	function toggleNav() {

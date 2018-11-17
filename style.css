@@ -5,6 +5,15 @@ html, body {
   background: #212721;
 }
 
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #999;
+    margin: 8px 0;
+    padding: 0;
+}
+
 p, h2, h3, h5 {
   color: white;
 }
@@ -14,7 +23,7 @@ th, td {
 }
 
 #advert {
-  padding-top: 8px;
+  padding: 8px 0px 8px 0px;
   width: 75%;
   height: auto;
 }
@@ -76,7 +85,45 @@ th, td {
   color: #666;
 }
 
-#Reset {
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 100%;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+		position: absolute;
+		z-index: 1;
+		bottom: 150%;
+		left: 50%;
+		margin-left: -50%;
+		opacity: 0;
+		transition: opacity 0.5s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+		opacity: 1;
+}
+
+#ResetHard, #ResetSoft {
 	margin-left: 10%;
 	padding: 12px 8px;
 	margin: 16px;
@@ -92,7 +139,7 @@ th, td {
 	box-shadow: 0 4px #999;
 }
 
-#Reset:active {
+#Reset:active, #ResetSoft:active {
   background-color: #991515;
   box-shadow: 0 5px #666;
   transform: translateY(2px);
@@ -143,7 +190,7 @@ th, td {
 
 .row-c {
   display: flex;
-  margin-left: 16px;
+  margin: 1rem;
   flex-direction: row;
   justify-content: flex-start;
 }
@@ -195,16 +242,106 @@ th, td {
 
 .table {
 	border-collapse: collapse;
-  margin-top: 10%;
 	width: 75%;
 }
 
+.table-items {
+	border-collapse: collapse;
+	width: 75%;
+	margin-top: 16px;
+}
+
+.btn-container {
+	display: flex;
+	cursor: pointer;
+	width: 75%;
+	justify-content: space-between;
+	outline: none;
+	color: white;
+	border: none;
+}
+
+.panelChanger {
+	display: flex;
+}
+
+#stats, #achievements, #items {
+	font-size: 1rem;
+	background-color:#1e1e1e;
+	-moz-border-radius:1px;
+	-webkit-border-radius:1px;
+	border: 1px solid black;
+	border-bottom: 0px;
+	cursor:pointer;
+	color: white;
+	padding:8px 12px;
+	text-decoration:none;
+}
+
+#stats:hover, #achievements:hover, #items:hover {
+	background-color:#343434;
+}
+
+#stats:disabled, #achievements:disabled, #items:disabled {
+	background-color:#999;
+}
+
+.statsPanel {
+	display: flex;
+	width: 75%;
+	outline: none;
+	color: white;
+	flex-direction: column;
+	background-color: #1e1e1e;
+	border: 1px solid black;
+}
+
+.column-stats {
+	font-size: 0.8rem;
+	width: 33%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 16px;
+}
+
+.stat-title {
+	display: flex;
+	width: 100%;
+	margin: 16px 16px 8px;
+}
+
+#multipleO, #multipleT, #multipleH {
+	font-size: 1.2rem;
+	background-color:#33a0ff;
+	-moz-border-radius:1px;
+	-webkit-border-radius:1px;
+	border: none;
+	cursor:pointer;
+	color: black;
+	padding:8px 12px;
+	text-decoration:none;
+}
+
+#multipleO:hover, #multipleT:hover, #multipleH:hover {
+	background-color:#498ee3;
+}
+
+#multipleO:disabled, #multipleT:disabled, #multipleH:disabled {
+	background-color:#999;
+}
+
+.item {
+	width: 48px;
+	background-image: url('hidden.png');
+	height: 48px;
+}
+
 .footer-row {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    flex-direction: row;
-    justify-content: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .column-options {
