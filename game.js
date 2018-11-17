@@ -34,7 +34,7 @@ function updateSwanson(clickAmount) {
   buttonsAvailable(pineappleCost, 'pineapple');
   shellsPerSecond();
 
-  shells = shells + (clickAmount * Math.pow(1.015, (totalBuildings)));
+  shells = shells + (clickAmount * Math.pow(1.008, (totalBuildings)));
   document.getElementById('shells').innerHTML = `Swanson has collected ${numberWithCommas(shells)} shells!`;
 }
 
@@ -222,7 +222,7 @@ function shellsPerSecond() {
   var snailSPS = ((10 * snail) * (1.019));
   var pineappleSPS = ((25 * pineapple) * (1.02));
 
-  var totalSPS =  (borgSPS + pizzaSPS + snailSPS + pineappleSPS) * Math.pow(1.015, (totalBuildings));
+  var totalSPS =  (borgSPS + pizzaSPS + snailSPS + pineappleSPS) * Math.pow(1.008, (totalBuildings));
   document.getElementById('sps').innerHTML = `Per second: ${numberWithCommas(totalSPS)}`;
 }
 
